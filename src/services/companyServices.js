@@ -4,6 +4,7 @@ const axios = require('axios');
 
 
 const getCompanyScore = async () => {
+    console.log('getCompanyScore');
     const url = 'https://store-0001.s3.amazonaws.com/input.csv';
     let resp = await axios.get(url);
     let responseData = resp.data;
@@ -48,7 +49,7 @@ const getCompanyScore = async () => {
                     roic: parseFloat(roicVal)
                 }
                 companyDetailsBySector.push(obj);
-                //await db.companyPerformace.create(obj);
+                await db.companyPerformace.create(obj);
             }
             sectorVisited.push(parsedCsv[i][1]);
         }
@@ -58,7 +59,7 @@ const getCompanyScore = async () => {
         const resById = await axios.get(companyIdUrl);
         companyDetailsById.push({id: resById.data.id, name: resById.data.name, ceoName: resById.data.ceo});
     }
-    //const responePushCompanyDetailsById = await db.companyInfo.bulkCreate(companyDetailsById);
+    const responePushCompanyDetailsById = await db.companyInfo.bulkCreate(companyDetailsById);
 
     const lenOfCompanies = companyDetailsById.length;
     const companyScore = [];
@@ -78,11 +79,9 @@ const getCompanyScore = async () => {
             name: companyDetailsById[i].name
         }
         companyScore.push(obj);
-    const companySS = await db.companyScore.create(obj);
-
-    return {status: 200, data: companySS};
-    // console.log(companyDetailsBySector)
+        const companySS = await db.companyScore.create(obj);
     }
+    return {status: 200, data: companyScore};
 }
 
 const getCompanyPerformanceService = async (companyId) => {
@@ -106,3 +105,4 @@ const changeCompanyNameService = async (companyId, name) => {
 module.exports = {}
 module.exports.getCompanyScore = getCompanyScore;
 module.exports.getCompanyPerformanceService = getCompanyPerformanceService;
+module.exports.changeCompanyNameService = changeCompanyNameService;

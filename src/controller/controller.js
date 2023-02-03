@@ -3,9 +3,10 @@ const services = require('../services/companyServices');
 
 
 const getCompanySectorAndId = async (req, res) => {
-    const {status, data} = services.getCompanyScore();
-    res.status(status).send(data)
-}
+    const {status, data} = await services.getCompanyScore();
+    res.status(status).json(data);
+    
+};
 
 const getCompanyPerformance = async (req, res) => {
     const comapnyId = req.params;

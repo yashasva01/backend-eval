@@ -12,4 +12,3 @@ router.post('/:companyId/:name', controller.changeCompanyName);
 router.get('/api/companies', controller.getRankedCompaniesBySector);
 
 module.exports = router;
-
