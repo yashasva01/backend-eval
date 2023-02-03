@@ -9,8 +9,7 @@ router.get('/performance/:comapnyId', controller.getCompanyPerformance);
 
 router.post('/:companyId/:name', controller.changeCompanyName);
 
-
-router.get('/api/companies?sector=:sector', controller.getRankedCompaniesBySector);
+router.get('/api/companies', controller.getRankedCompaniesBySector);
 
 module.exports = router;
 
