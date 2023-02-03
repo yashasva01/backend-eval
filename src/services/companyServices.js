@@ -90,6 +90,19 @@ const getCompanyPerformanceService = async (companyId) => {
     return {status: 200, data: companyDetail};
 }
 
+const changeCompanyNameService = async (companyId, name) => {
+    if (!companyId || !name) {
+        return {status: 400, data: 'Bad Request'};
+    }
+
+    const isPresent = await db.companyInfo.findOne({where: {id: taskId}});
+    if(!isPresent){
+        return {status: 400, data: 'Company not found'};
+    }
+        await db.tasks.update(obj, {name : name},{where: {id: companyId}});
+        const updatedTask = await db.tasks.findOne({where: {id: taskId}});
+        return {status: 200, data: updatedTask};
+}
 module.exports = {}
 module.exports.getCompanyScore = getCompanyScore;
 module.exports.getCompanyPerformanceService = getCompanyPerformanceService;
