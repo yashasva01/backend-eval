@@ -10,7 +10,7 @@ module.exports = {
       },
       id: {
         type: Sequelize.STRING,
-        primaryKey: true,
+        primaryKey: true
       },
       name: {
         type: Sequelize.STRING
@@ -19,7 +19,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       address: {
-        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {

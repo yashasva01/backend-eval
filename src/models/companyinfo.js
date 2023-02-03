@@ -12,22 +12,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasOne(models.companyPerformace, {
-        foreignKey: "companyId",
-        targetKey: "id",
-        
+        foreignKey: 'CompanyId',
+        targetKey: 'id'
       });
     }
   }
   companyInfo.init({
     id: {
       type: DataTypes.STRING,
-      primaryKey: true,
+      primaryKey: true
     },
     name: DataTypes.STRING,
     ceoName: DataTypes.STRING,
     address: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false
     }
   }, {
     sequelize,
